@@ -1,0 +1,30 @@
+ #include <iostream>
+#include <chrono>
+
+using namespace std;
+using namespace chrono;
+
+int fibonacciRekursif(int n) {
+    if (n <= 1)
+        return n;
+    return fibonacciRekursif(n - 1) + fibonacciRekursif(n - 2);
+}
+
+int main() {
+    int nilai_n[] = {10, 25, 30, 40, 50};
+    int jumlah_nilai = sizeof(nilai_n) / sizeof(nilai_n[0]);
+
+    cout << "Pendekatan Rekursif:" << endl;
+    for (int i = 0; i < jumlah_nilai; ++i) {
+        int n = nilai_n[i];
+        auto start_rekursif = high_resolution_clock::now();
+        int hasil_rekursif = fibonacciRekursif(n);
+        auto stop_rekursif = high_resolution_clock::now();
+        auto durasi_rekursif = duration_cast<microseconds>(stop_rekursif - start_rekursif);
+        cout << "Fibonacci untuk n = " << n << endl;
+        cout << "Waktu eksekusi: " << durasi_rekursif.count() << " mikrodetik" << endl;
+        cout << endl;
+    }
+
+    return 0;
+}
