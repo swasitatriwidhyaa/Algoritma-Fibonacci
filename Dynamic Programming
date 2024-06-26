@@ -1,0 +1,35 @@
+#include <iostream>
+#include <chrono>
+#include <vector>
+using namespace std;
+using namespace chrono;
+
+int fibonacciDP(int n) {
+    vector<int> fib(n + 1);
+    fib[0] = 0;
+    if (n > 0) {
+        fib[1] = 1;
+        for (int i = 2; i <= n; ++i)
+            fib[i] = fib[i - 1] + fib[i - 2];
+    }
+    return fib[n];
+}
+
+int main() {
+    int nilai_n[] = {10, 25, 30, 40, 50};
+    int jumlah_nilai = sizeof(nilai_n) / sizeof(nilai_n[0]);
+
+    cout << "Pendekatan Dynamic Programming:" << endl;
+    for (int i = 0; i < jumlah_nilai; ++i) {
+        int n = nilai_n[i];
+        auto start_dp = high_resolution_clock::now();
+        int hasil_dp = fibonacciDP(n);
+        auto stop_dp = high_resolution_clock::now();
+        auto durasi_dp = duration_cast<microseconds>(stop_dp - start_dp);
+        cout << "Fibonacci untuk n = " << n <<  endl;
+        cout << "Waktu eksekusi: " << durasi_dp.count() << " mikrodetik" << endl;
+        cout << endl;
+    }
+
+    return 0;
+}
